@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: externalsecrets-refresh
+  namespace: default
+rules:
+- apiGroups: ["external-secrets.io"]
+  resources: ["externalsecrets"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: ["external-secrets.io"]
+  resources: ["externalsecrets/status"]
+  verbs: ["get", "watch"]

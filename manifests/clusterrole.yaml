@@ -1,0 +1,12 @@
+# Alternative cluster-wide RBAC (use instead of Role + RoleBinding for cluster-wide access)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: externalsecrets-refresh
+rules:
+- apiGroups: ["external-secrets.io"]
+  resources: ["externalsecrets"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: ["external-secrets.io"]
+  resources: ["externalsecrets/status"]
+  verbs: ["get", "watch"]

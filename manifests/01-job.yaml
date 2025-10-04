@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: externalsecrets-refresh
+  namespace: default
+spec:
+  ttlSecondsAfterFinished: 300
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: externalsecrets-refresh
+    spec:
+      serviceAccountName: externalsecrets-refresh
+      restartPolicy: Never
+      containers:
+      - name: refresher
+        image: externalsecrets-refresh:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        # Optional: Specify namespace to watch (default: current namespace)
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        # Optional: Label selector to filter ExternalSecrets
+        # Example: "app=myapp,env=prod"
+        - name: LABEL_SELECTOR
+          value: ""
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
