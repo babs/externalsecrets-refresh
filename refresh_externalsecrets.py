@@ -64,7 +64,7 @@ def configure_structlog() -> None:
 
 
 configure_structlog()
-logger = structlog.get_logger()
+logger = structlog.get_logger("refresh_externalsecrets")
 
 
 REFRESH_TIMEOUT = 60  # seconds
