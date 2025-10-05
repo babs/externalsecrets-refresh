@@ -469,9 +469,12 @@ def main():
 
     logger.info(
         "job_started",
-        job_name="ExternalSecret Refresh Job",
+        job_name="ExternalSecrets Refresh Job",
         namespace=namespace or "all",
         label_selector=label_selector or "none",
+        version=os.environ.get("VERSION", "v0.0.0"),
+        commit_hash=os.environ.get("COMMIT_HASH", "00000000-dirty"),
+        build_timestamp=os.environ.get("BUILD_TIMESTAMP", "1970-01-01T00:00:00+00:00"),
     )
 
     refresher = ExternalSecretRefresher(namespace=namespace, label_selector=label_selector)
