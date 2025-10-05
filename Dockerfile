@@ -18,6 +18,11 @@ ARG COMMIT_HASH="00000000-dirty"
 ARG PROJECT_URL="externalsecrets-refresh-job"
 ARG VERSION="v0.0.0"
 
+ENV BUILD_TIMESTAMP=${BUILD_TIMESTAMP}
+ENV COMMIT_HASH=${COMMIT_HASH}
+ENV PROJECT_URL=${PROJECT_URL}
+ENV VERSION=${VERSION}
+
 LABEL org.opencontainers.image.source=${PROJECT_URL}
 LABEL org.opencontainers.image.created=${BUILD_TIMESTAMP}
 LABEL org.opencontainers.image.version=${VERSION}
