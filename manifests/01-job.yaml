@@ -15,7 +15,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: refresher
-        image: externalsecrets-refresh:latest
+        image: ghcr.io/babs/externalsecrets-refresh:latest
         imagePullPolicy: IfNotPresent
         env:
         # Optional: Specify namespace to watch (default: current namespace)

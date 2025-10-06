@@ -1,6 +1,6 @@
-# ExternalSecrets Refresh Job
+# ExternalSecrets Refresh
 
-A Kubernetes Job that triggers ExternalSecrets to refresh by patching their annotations and monitors the refresh status.
+A container to be used as Kubernetes Job that triggers ExternalSecrets to refresh by patching their annotations and monitors the refresh status.
 
 To be used for example in Helm Charts or ArgoCD applications.
 
