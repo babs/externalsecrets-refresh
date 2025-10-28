@@ -41,6 +41,7 @@ The job can be configured via environment variables:
 
 - `NAMESPACE`: Target namespace (defaults to job's namespace). Leave unset for all namespaces.
 - `LABEL_SELECTOR`: Label selector to filter ExternalSecrets (e.g., `app=myapp,env=prod`)
+- `EXTERNALSECRETS_VERSION`: API version for ExternalSecrets (default: `v1`)
 
 **Deploy the job:**
 

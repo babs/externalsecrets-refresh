@@ -84,6 +84,9 @@ class ExternalSecretRefresher:
         Args:
             namespace: Kubernetes namespace to watch. If None, uses all namespaces.
             label_selector: Label selector to filter ExternalSecrets.
+
+        Environment:
+            EXTERNALSECRETS_VERSION: API version for ExternalSecrets (default: v1).
         """
         try:
             config.load_incluster_config()
@@ -96,7 +99,7 @@ class ExternalSecretRefresher:
         self.namespace = namespace
         self.label_selector = label_selector or ""
         self.group = "external-secrets.io"
-        self.version = "v1beta1"
+        self.version = os.getenv("EXTERNALSECRETS_VERSION", "v1")
         self.plural = "externalsecrets"
 
         # Bind logger with context
@@ -132,7 +135,7 @@ class ExternalSecretRefresher:
             self.logger.info("externalsecrets_listed", count=len(items))
             return items
         except ApiException as e:
-            self.logger.error("externalsecrets_list_failed", error=str(e))
+            self.logger.error("externalsecrets_list_failed", error=str(e), exc_info=True)
             raise
 
     def get_last_refresh_time(self, external_secret: Dict[str, Any]) -> Optional[datetime]:
@@ -190,7 +193,10 @@ class ExternalSecretRefresher:
             return True
         except ApiException as e:
             self.logger.error(
-                "externalsecret_patch_failed", external_secret=f"{namespace}/{name}", error=str(e)
+                "externalsecret_patch_failed",
+                external_secret=f"{namespace}/{name}",
+                error=str(e),
+                exc_info=True,
             )
             return False
 
@@ -333,7 +339,7 @@ class ExternalSecretRefresher:
                     break
 
         except ApiException as e:
-            self.logger.error("watch_error", error=str(e))
+            self.logger.error("watch_error", error=str(e), exc_info=True)
         finally:
             watcher.stop()
 
