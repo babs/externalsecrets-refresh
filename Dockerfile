@@ -15,7 +15,7 @@ FROM python:3.13-slim
 
 ARG BUILD_TIMESTAMP="1970-01-01T00:00:00+00:00"
 ARG COMMIT_HASH="00000000-dirty"
-ARG PROJECT_URL="https://github.com/babs/externalsecret-refresh"
+ARG PROJECT_URL="https://github.com/babs/externalsecrets-refresh"
 ARG VERSION="v0.0.0"
 
 ENV BUILD_TIMESTAMP=${BUILD_TIMESTAMP}
